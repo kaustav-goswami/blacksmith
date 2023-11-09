@@ -24,7 +24,7 @@ class Memory {
   volatile char *start_address = (volatile char *) 0x2000000000;
 
   // the mount point of the huge pages filesystem
-  const std::string hugetlbfs_mountpoint = "/mnt/huge/buff";
+  const std::string hugetlbfs_mountpoint = "/dev/hugepages";
 
   // the size of the allocated memory area in bytes
   uint64_t size;
