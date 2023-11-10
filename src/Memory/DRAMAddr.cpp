@@ -275,7 +275,8 @@ void DRAMAddr::initialize_configs() {
        }
   };
   DRAMAddr::Configs = {
-       {(CHANS(1UL) | DIMMS(1UL) | RANKS(2UL) | BANKS(16UL)), dram_cfg}
+      {(CHANS(1UL) | DIMMS(1UL) | RANKS(1UL) | BANKS(16UL)), single_rank},
+      {(CHANS(1UL) | DIMMS(1UL) | RANKS(2UL) | BANKS(16UL)), dual_rank}
  };
 }
 
