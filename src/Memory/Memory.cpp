@@ -26,7 +26,7 @@ void Memory::allocate_memory(size_t mem_size) {
     }
     target = (volatile char*) mapped_target;
   } else {
-    Logger::log_info("making sure madvise is called in gem5);
+    Logger::log_info("making sure madvise is called in gem5");
     // allocate memory using huge pages
     assert(posix_memalign((void **) &target, MEM_SIZE, MEM_SIZE)==0);
     assert(madvise((void *) target, MEM_SIZE, MADV_HUGEPAGE)==0);
