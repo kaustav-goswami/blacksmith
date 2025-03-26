@@ -8,7 +8,9 @@ void Memory::allocate_memory(size_t mem_size) {
   volatile char *target = nullptr;
   FILE *fp;
 
-  if (superpage) {
+  // in gem5, we don't have 1 GiB huge pages on x86 kernels. Instead, we'll use 512 2 MiB
+  // pages via madvise
+  if (false) { // superpage) {
     // allocate memory using super pages
     fp = fopen(hugetlbfs_mountpoint.c_str(), "w+");
     if (fp==nullptr) {
@@ -24,6 +26,7 @@ void Memory::allocate_memory(size_t mem_size) {
     }
     target = (volatile char*) mapped_target;
   } else {
+    Logger::log_info("making sure madvise is called in gem5);
     // allocate memory using huge pages
     assert(posix_memalign((void **) &target, MEM_SIZE, MEM_SIZE)==0);
     assert(madvise((void *) target, MEM_SIZE, MADV_HUGEPAGE)==0);
